@@ -5,12 +5,12 @@ FROM titles;
 
 #Q2 List the first 10 distinct last name sorted in descending order.
 
-SELECT DISTINCT *
+SELECT DISTINCT last_name
 FROM employees
 ORDER BY last_name DESC 
 LIMIT 10;
 
-# The last name for the last ten employess sorted alphabetically in descending order is Zykh for all of them
+# The last name for the last ten employees sorted alphabetically in descending order is Zykh, Zyda, Zwicker, Zweizig, Zumaque, Zultner, Zucker, Zuberek, Zschoche, Zongker
 
 #Q3 Find all previous or current employees hired in the 90s and born on Christmas. Find the first 5 employees hired in the 90's by sorting by hire date and limiting your results to the first 5 records. Write a comment in your code that lists the five names of the employees returned.
 
@@ -33,4 +33,3 @@ ORDER BY hire_date
 LIMIT 5 OFFSET 45;
 
 #LIMIT and OFFSET here are related in that OFFSET is skipping the first 45 records in the data, and from there is outputting what is left, with the LIMIT limiting the amount of results given. The page number here is 10, because with a limit of 5 per page, to get to 10 we need to get the first 9 pages out of the way, which is 45
-
