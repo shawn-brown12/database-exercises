@@ -2,7 +2,7 @@ USE employees;
 #Q1 Write a query that returns all employees, their department number, their start date, their end date, and a new column 'is_current_employee' that is a 1 if the employee is still with the company and 0 if not
 
 SELECT CONCAT(first_name, ' ', last_name) AS full_name, dept_no, from_date, to_date,
-	IF(to_date > CURDATE(), True, False) AS is_current_employee
+	IF(to_date > CURDATE(), True, False) AS is_current_employee. -- Could also not write this line and simply have a to_date > now() at the end of my SELECT
 FROM dept_emp
 JOIN employees AS e USING(emp_no);
 
@@ -15,6 +15,15 @@ SELECT CONCAT(first_name, ' ', last_name) AS full_name,
 		END AS alpha_group
 FROM employees;
 
+#Much simpler syntax
+SELECT first_name, last_name,
+	CASE 
+		WHEN last_name <= 'H' THEN 'A-H'
+		WHEN last_name <= 'Q' THEN 'I-Q'
+		ELSE 'R-Z'
+		END AS alpha_group
+FROM employees;
+
 #Q3 How many employees (current or previous) were born in each decade?
 /*
 SELECT birth_date,
@@ -23,13 +32,12 @@ SELECT birth_date,
 	COUNT(CASE WHEN birth_date LIKE '197%' THEN birth_date END) AS 'born_in 1970s'
 FROM employees
 GROUP BY birth_date;
-
 */
 
 SELECT COUNT(*) AS total_count,
 	CASE 
-		WHEN birth_date LIKE '195%' THEN 'Born_in_50s'
-		ELSE 'Born_in_1960s'
+		WHEN birth_date LIKE '195%' THEN 'born_in_1950s'
+		ELSE 'born_in_1960s'
 		END as which_decade
 FROM employees
 GROUP BY which_decade;
